@@ -1,12 +1,25 @@
 {
   "name": "library-collection",
   "version": "1.0.0",
-  "description": "",
+  "description": "Library Application for FWG 16",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "library",
+    "books",
+    "fazztrack",
+    "fwg",
+    "fwg16"
+  ],
+  "author": "Fazztrack",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
