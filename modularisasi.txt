@@ -1,0 +1,19 @@
+tujuan
+membagi bagi code menjadi beberapa file
+
+kenapa
+agar setiap file/folder itu dipisahkan berdasarkan fungsi/kegunaannya
+
+pembagiannya
+1. Routing => folder yang berisikan router, menangani handler mana yang
+menangani request
+
+2. Controller/Handler => folder yang berisikan fungsi-fungsi handler utama/terakhir
+
+3. Model/Repo => code yang berhubungan dengan DB
+
+4. Helper/Utils => fungsi lain, reusable function
+
+5. Middleware => reusable handler
+
+6. Configs => konfigurasi DB, Services, Environment
