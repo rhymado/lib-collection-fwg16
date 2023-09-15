@@ -1,5 +1,5 @@
 const { get, search, insert } = require("../Models/books.model");
-const getAllBooks = async (req, res, next) => {
+const getAllBooks = async (req, res) => {
   // req => Request Object
   // berisikan informasi dari suatu request (method, body, dll)
   // res => Response Object

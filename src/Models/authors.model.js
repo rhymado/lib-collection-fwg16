@@ -1,10 +1,13 @@
 const db = require("../Configs/postgre");
 const insert = (authorName) => {
-  //   return new Promise((resolve, reject) => {
+  // return new Promise((resolve, reject) => {
   const sql = "insert into authors (author_name) values ($1) returning id, author_name";
   const values = [authorName];
+  // if (values)
   return db.query(sql, values);
-  //   });
+  // resolve();
+  // reject();
+  // });
 };
 
 const update = (authorName, id) => {
