@@ -10,6 +10,7 @@ const bookRouter = require("./books.router");
 const authorRouter = require("./authors.router");
 const promoRouter = require("./promos.router");
 const publisherRouter = require("./publishers.router");
+const authRouter = require("./auth.router");
 
 mainRouter.get(
   "/",
@@ -33,5 +34,6 @@ mainRouter.use("/books", bookRouter);
 mainRouter.use("/author", authorRouter);
 mainRouter.use("/promos", promoRouter);
 mainRouter.use("/publisher", publisherRouter);
+mainRouter.use("/auth", authRouter);
 
 module.exports = mainRouter;
