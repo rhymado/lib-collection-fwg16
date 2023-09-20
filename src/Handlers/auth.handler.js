@@ -79,7 +79,7 @@ const login = async (req, res) => {
       payload,
       jwtKey,
       {
-        expiresIn: "5m",
+        expiresIn: "10m",
         issuer,
       },
       (err, token) => {
