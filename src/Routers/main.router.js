@@ -33,7 +33,7 @@ mainRouter.get(
 );
 
 mainRouter.use("/books", isLogin, bookRouter);
-mainRouter.use("/author", isLogin, authorRouter);
+mainRouter.use("/author", authorRouter);
 mainRouter.use("/promos", promoRouter);
 mainRouter.use("/publisher", publisherRouter);
 mainRouter.use("/auth", authRouter);
