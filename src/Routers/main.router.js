@@ -13,6 +13,7 @@ const publisherRouter = require("./publishers.router");
 const authRouter = require("./auth.router");
 
 const { isLogin } = require("../Middlewares/authorization");
+const { singleUpload } = require("../Middlewares/diskUpload");
 
 mainRouter.get(
   "/",
@@ -31,6 +32,13 @@ mainRouter.get(
     });
   }
 );
+
+mainRouter.post("/upload", singleUpload("image"), (req, res) => {
+  console.log(req.file);
+  res.status(200).json({
+    msg: "OK",
+  });
+});
 
 mainRouter.use("/books", isLogin, bookRouter);
 mainRouter.use("/author", authorRouter);

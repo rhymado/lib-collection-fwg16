@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const server = express();
 // const app = require("express")();
 
+server.use(express.static("./public"));
 // Pasang parser untuk json dan form url encoded
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
