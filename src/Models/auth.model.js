@@ -7,7 +7,7 @@ const createUser = (username, email, userpass) => {
 };
 
 const getPwd = (email) => {
-  const sql = "SELECT userpass, username FROM users WHERE email = $1";
+  const sql = "SELECT userpass, username, user_role AS \"role\" FROM users WHERE email = $1";
   const values = [email];
   return db.query(sql, values);
 };

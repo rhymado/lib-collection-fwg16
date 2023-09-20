@@ -1,7 +1,7 @@
 const argon = require("argon2");
 const jwt = require("jsonwebtoken");
 const { createUser, getPwd } = require("../Models/auth.model");
-const { jwtKey } = require("../Configs/environments");
+const { jwtKey, issuer } = require("../Configs/environments");
 
 /**
  * 1. menerima body (username, email, password) dari client
@@ -63,7 +63,7 @@ const login = async (req, res) => {
         // msg: "Email not registered",
         msg: "Email or Password is wrong",
       });
-    const { userpass, username } = result.rows[0];
+    const { userpass, username, role } = result.rows[0];
     const isValid = await argon.verify(userpass, password);
     if (!isValid)
       return res.status(401).json({
@@ -73,13 +73,14 @@ const login = async (req, res) => {
     const payload = {
       username,
       email,
+      role,
     };
     jwt.sign(
       payload,
       jwtKey,
       {
         expiresIn: "5m",
-        issuer: "fazztrack",
+        issuer,
       },
       (err, token) => {
         if (err) throw err;

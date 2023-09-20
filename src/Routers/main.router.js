@@ -12,6 +12,8 @@ const promoRouter = require("./promos.router");
 const publisherRouter = require("./publishers.router");
 const authRouter = require("./auth.router");
 
+const { isLogin } = require("../Middlewares/authorization");
+
 mainRouter.get(
   "/",
   (req, res, next) => {
@@ -30,8 +32,8 @@ mainRouter.get(
   }
 );
 
-mainRouter.use("/books", bookRouter);
-mainRouter.use("/author", authorRouter);
+mainRouter.use("/books", isLogin, bookRouter);
+mainRouter.use("/author", isLogin, authorRouter);
 mainRouter.use("/promos", promoRouter);
 mainRouter.use("/publisher", publisherRouter);
 mainRouter.use("/auth", authRouter);
