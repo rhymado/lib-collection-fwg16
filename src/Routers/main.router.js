@@ -15,6 +15,8 @@ const authRouter = require("./auth.router");
 const { isLogin } = require("../Middlewares/authorization");
 const { singleUpload } = require("../Middlewares/diskUpload");
 
+const { sendMail } = require("../Helpers/sendMail");
+
 mainRouter.get(
   "/",
   (req, res, next) => {
@@ -38,6 +40,28 @@ mainRouter.post("/upload", singleUpload("image"), (req, res) => {
   res.status(200).json({
     msg: "OK",
   });
+});
+
+mainRouter.get("/mail", async (req, res) => {
+  try {
+    const info = await sendMail({
+      to: "maxobi5436@fandsend.com",
+      subject: "Email Activation",
+      data: {
+        username: "fazztrack",
+        activationLink: "https://www.fazztrack.com/",
+      },
+    });
+    res.status(200).json({
+      msg: "Success",
+      response: info.response,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      msg: "Internal Server Error",
+    });
+  }
 });
 
 mainRouter.use("/books", isLogin, bookRouter);
