@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Library Application for FWG 16",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "nodemon",
     "start": "node index.js",
