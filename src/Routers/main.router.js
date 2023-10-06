@@ -45,23 +45,28 @@ const singleUpload = (fieldname) => {
 
 mainRouter.post("/upload", singleUpload("image"), async (req, res) => {
   // console.log(req.file);
-  try {
-    // mengambil id dari token atau db
-    const id = 1;
-    const { data, err } = await uploader(req, "user-profile", id);
-    if (err) throw err;
-    res.status(200).json({
-      msg: "OK",
-      data: {
-        url: data.secure_url,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      msg: "Internal Server Error",
-    });
+  if (environment === "VERCEL") {
+    try {
+      // mengambil id dari token atau db
+      const id = 1;
+      const { data, err } = await uploader(req, "user-profile", id);
+      if (err) throw err;
+      return res.status(200).json({
+        msg: "OK",
+        data: {
+          url: data.secure_url,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        msg: "Internal Server Error",
+      });
+    }
   }
+  return res.status(200).json({
+    msg: "OK",
+  });
 });
 
 mainRouter.get("/mail", async (req, res) => {
