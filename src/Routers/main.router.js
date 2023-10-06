@@ -46,7 +46,9 @@ const singleUpload = (fieldname) => {
 mainRouter.post("/upload", singleUpload("image"), async (req, res) => {
   // console.log(req.file);
   try {
-    const { data, err } = await uploader(req, "user-profile", 1);
+    // mengambil id dari token atau db
+    const id = 1;
+    const { data, err } = await uploader(req, "user-profile", id);
     if (err) throw err;
     res.status(200).json({
       msg: "OK",
