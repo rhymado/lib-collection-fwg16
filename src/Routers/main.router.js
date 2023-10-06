@@ -13,7 +13,10 @@ const publisherRouter = require("./publishers.router");
 const authRouter = require("./auth.router");
 
 const { isLogin } = require("../Middlewares/authorization");
-const { singleUpload } = require("../Middlewares/diskUpload");
+const { singleUpload: singleDiskUpload } = require("../Middlewares/diskUpload");
+const { singleUpload: singleMemoryUpload } = require("../Middlewares/memoryUpload");
+const { environment } = require("../Configs/environments");
+const { uploader } = require("../Helpers/cloudinary");
 
 const { sendMail } = require("../Helpers/sendMail");
 
@@ -35,11 +38,28 @@ mainRouter.get(
   }
 );
 
-mainRouter.post("/upload", singleUpload("image"), (req, res) => {
-  console.log(req.file);
-  res.status(200).json({
-    msg: "OK",
-  });
+const singleUpload = (fieldname) => {
+  if (environment === "VERCEL") return singleMemoryUpload(fieldname);
+  return singleDiskUpload(fieldname);
+};
+
+mainRouter.post("/upload", singleUpload("image"), async (req, res) => {
+  // console.log(req.file);
+  try {
+    const { data, err } = await uploader(req, "user-profile", 1);
+    if (err) throw err;
+    res.status(200).json({
+      msg: "OK",
+      data: {
+        url: data.secure_url,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "Internal Server Error",
+    });
+  }
 });
 
 mainRouter.get("/mail", async (req, res) => {

@@ -11,4 +11,8 @@ module.exports = {
   authService: process.env.MAIL_SERVICE,
   authType: process.env.MAIL_AUTH_TYPE,
   authUser: process.env.MAIL_USER,
+  cloudName: process.env.CLOUDINARY_NAME,
+  cloudKey: process.env.CLOUDINARY_KEY,
+  cloudSecret: process.env.CLOUDINARY_SECRET,
+  environment: process.env.ENVIRONMENT,
 };
