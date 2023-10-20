@@ -2,7 +2,7 @@ require("dotenv").config();
 // require (es5, commonJS)
 // import (es6, module)
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const morgan = require("morgan");
 
 // generate express application
@@ -20,12 +20,12 @@ server.listen(8000, () => {
 });
 
 server.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
-// server.use(
-//   cors({
-//     origin: "http://127.0.0.1:5500",
-//     methods: ["POST", "PATCH"],
-//   })
-// );
+server.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["POST", "PATCH"],
+  })
+);
 
 const mainRouter = require("./src/Routers/main.router");
 server.use(mainRouter);
